@@ -16,7 +16,7 @@ pipeline {
         stage('SonarQube analysis') {
             steps {
                 // Ensure this matches the SonarQube server name exactly
-                withSonarQubeEnv('aditya-sonarube-server') {
+                withSonarQubeEnv('aditya-sonarqube-server') {
                     // Use the scanner tool name exactly as configured in Global Tool Configuration
                     sh 'sonar-scanner'
                 }
