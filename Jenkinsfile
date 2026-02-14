@@ -15,9 +15,9 @@ pipeline {
 
         stage('SonarQube analysis') {
             steps {
-                // Use the exact name of your SonarQube installation in Jenkins
+                // Ensure this matches the SonarQube server name exactly
                 withSonarQubeEnv('aditya-sonarube-server') {
-                    // Call sonar scanner using the Jenkins tool configuration
+                    // Use the scanner tool name exactly as configured in Global Tool Configuration
                     sh 'sonar-scanner'
                 }
             }
