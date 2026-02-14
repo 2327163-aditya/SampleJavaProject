@@ -4,7 +4,7 @@ pipeline {
         PATH = "/opt/maven/bin:${env.PATH}"
     }
     stages {
-        stage('Build') {
+        stage('build') {
             steps {
                 sh 'mvn clean install'
             }
