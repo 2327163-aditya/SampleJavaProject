@@ -34,10 +34,10 @@ pipeline {
             }
         }
 
-        stage("Jar Publish") {
+        stage("WAR Publish") {
             steps {
                 script {
-                    echo '<---------------- Jar Publish Started ----------------->'
+                    echo '<---------------- WAR Publish Started ----------------->'
 
                     def server = Artifactory.newServer(
                         url: registry + "artifactory",
@@ -49,9 +49,9 @@ pipeline {
                     def uploadSpec = """{
                         "files": [
                             {
-                                "pattern": "jarstaging/(*)",
-                                "target": "aditya-libs-release-local/{1}",
-                                "flat": "false",
+                                "pattern": "target/*.war",
+                                "target": "aditya-libs-release-local/",
+                                "flat": "true",
                                 "props": "${properties}",
                                 "exclusions": ["*.sha1", "*.md5"]
                             }
@@ -62,7 +62,7 @@ pipeline {
                     buildInfo.env.collect()
                     server.publishBuildInfo(buildInfo)
 
-                    echo '<---------------- Jar Publish Ended ----------------->'
+                    echo '<---------------- WAR Publish Ended ----------------->'
                 }
             }
         }
