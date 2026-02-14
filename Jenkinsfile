@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        PATH = "/opt/maven/bin:${env.PATH}"
+        MAVEN_HOME = tool name: 'Maven-3.9.0', type: 'maven'
+        PATH = "${MAVEN_HOME}/bin:${env.PATH}"
     }
 
     stages {
@@ -13,12 +14,10 @@ pipeline {
             }
         }
 
-        stage('SonarQube analysis') {
+        stage('SonarQube Analysis') {
             steps {
-                // Ensure this matches the SonarQube server name exactly
                 withSonarQubeEnv('aditya-sonarqube-server') {
-                    // Use the scanner tool name exactly as configured in Global Tool Configuration
-                    sh 'sonar-scanner'
+                    sh 'mvn sonar:sonar'
                 }
             }
         }
