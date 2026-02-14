@@ -18,7 +18,7 @@ pipeline {
                 scannerHome = tool 'aditya-sonar-scanner'
             }
             steps {
-                withSonarQubeEnv('aditya-sonarqube-server') {
+                withSonarQubeEnv('aditya-sonarube-server') {
                     sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
