@@ -14,17 +14,15 @@ pipeline {
         }
 
         stage('SonarQube analysis') {
-            environment {
-                scannerHome = tool 'aditya-sonar-scanner'
-            }
             steps {
+                // Use the exact name of your SonarQube installation in Jenkins
                 withSonarQubeEnv('aditya-sonarube-server') {
-                    sh "${scannerHome}/bin/sonar-scanner"
+                    // Call sonar scanner using the Jenkins tool configuration
+                    sh 'sonar-scanner'
                 }
             }
         }
 
     }
 }
-
 
